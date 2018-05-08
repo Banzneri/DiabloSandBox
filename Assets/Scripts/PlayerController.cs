@@ -4,8 +4,18 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] LayerMask _groundLayer;
+    [SerializeField] LayerMask _npcLayer;
+
     private Vector3 destination = Vector3.zero;
     private NavMeshAgent navMeshAgent;
+
+    private bool isMoving = false;
+
+    public bool IsMoving
+    {
+        get { return isMoving; }
+    }
 
     private void Start()
     {
@@ -15,16 +25,39 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         if (Input.GetMouseButton(0))
         {
-            RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            HandleMovement();
+            HandleNpcInteraction();
+        }
+        if (navMeshAgent.remainingDistance < 1)
+        {
+            isMoving = false;
+        }
+    }
 
-            if (Physics.Raycast(ray, out hit, 1000))
-            {
-                navMeshAgent.destination = hit.point;
-            }
+    void HandleMovement()
+    {
+        RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out hit, 1000, _groundLayer))
+        {
+            navMeshAgent.destination = hit.point;
+            isMoving = true;
+        }
+    }
+
+    void HandleNpcInteraction()
+    {
+        RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out hit, 1000, _npcLayer))
+        {
+            Debug.Log("ClickNpc");
+            hit.collider.gameObject.GetComponent<NpcController>().SetActivated(true);
+            navMeshAgent.destination = hit.point;
         }
     }
 }
