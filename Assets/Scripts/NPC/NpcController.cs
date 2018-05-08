@@ -5,12 +5,13 @@ using UnityEngine.AI;
 
 public class NpcController : MonoBehaviour {
     [SerializeField] private LayerMask _layer;
-    string _greeting = "Moro homo";
+    [SerializeField] private string _greeting;
+    GameObject player;
+
     bool show = false;
     bool activated = false;
     float waitCounter = 0.0f;
     float waitTime = 2.0f;
-    GameObject player;
     float activateDistance = 2f;
 
 	// Use this for initialization
@@ -50,7 +51,7 @@ public class NpcController : MonoBehaviour {
     {
         if (show)
         {
-            GUI.Box(new Rect(Screen.width / 2, Screen.height / 2, 100, 20 ), _greeting);
+            GUI.Box(new Rect(Screen.width / 2, Screen.height / 2, 200, 20 ), _greeting);
         }
     }
 }
