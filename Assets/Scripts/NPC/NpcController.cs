@@ -5,14 +5,25 @@ using UnityEngine.AI;
 
 public class NpcController : MonoBehaviour {
     [SerializeField] private LayerMask _layer;
+    [SerializeField] private LayerMask _interactLayer;
+    [SerializeField] private LayerMask _groundLayer;
     [SerializeField] private string _greeting;
     [SerializeField] private string _name;
+    [SerializeField] private Material _activeMaterial;
+    [SerializeField] private Material _inActiveMaterial;
+    [SerializeField] private GameObject _selectionOutline;
+
     GameObject player;
 
     bool show = false;
     bool activated = false;
     float showTime = 2.0f;
     float activateDistance = 2f;
+
+    public bool Activated
+    {
+        get { return activated; }
+    }
 
 	// Use this for initialization
 	void Start () {
@@ -22,17 +33,12 @@ public class NpcController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
     {
+        HandleActivate();
         if (activated && !show)
         {
             if (Vector3.Distance(transform.position, player.transform.position) < activateDistance)
             {
-                show = true;
-                activated = false;
-                player.GetComponent<NavMeshAgent>().destination = player.transform.position;
-                Vector3 lookAt = transform.position;
-                lookAt.y = player.transform.position.y;
-                player.transform.LookAt(lookAt);
-                StartCoroutine(StopShowing());
+                DoInteraction();
             }
         }
     }
@@ -53,11 +59,56 @@ public class NpcController : MonoBehaviour {
         activated = activate;
     }
 
+    void DoInteraction()
+    {
+        show = true;
+        activated = false;
+        player.GetComponent<NavMeshAgent>().destination = player.transform.position;
+        Vector3 lookAt = transform.position;
+        lookAt.y = player.transform.position.y;
+        player.transform.LookAt(lookAt);
+        StartCoroutine(StopShowing());
+    }
+
+    void HandleActivate()
+    {   
+        if (Input.GetMouseButtonDown(0))
+        {
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out hit, 1000, _interactLayer))
+            {
+                NpcController npc = hit.collider.gameObject.GetComponentInParent<NpcController>();
+                bool active = npc.gameObject.Equals(this.gameObject);
+                activated = active;
+                //_selectionOutline.SetActive(active);
+            }
+            else if (Physics.Raycast(ray, out hit, 1000, _groundLayer))
+            {
+                activated = false;
+                //_selectionOutline.SetActive(false);
+            }
+        }
+        else if (Input.GetMouseButton(0))
+        {
+            
+        }
+    }
+
     private void OnGUI()
     {
         if (show)
         {
-            GUI.Box(new Rect(Screen.width / 2, Screen.height / 2, 200, 20 ), _greeting + " " + _name);
+            Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
+            screenPos.y = Screen.height - screenPos.y - 100;
+            screenPos.x -= 100;
+            GUI.Box(new Rect(screenPos.x, screenPos.y, 200, 25 ), _greeting + " " + _name);
         }
+    }
+
+    private void SetMaterial(bool active)
+    {
+        GetComponentInChildren<Renderer>().material = active ? _activeMaterial : _inActiveMaterial;
     }
 }

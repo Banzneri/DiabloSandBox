@@ -6,6 +6,9 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] LayerMask _groundLayer;
     [SerializeField] LayerMask _npcLayer;
+    [SerializeField] LayerMask _interactionLayer;
+    [SerializeField] GameObject _destinationParticles;
+    
 
     private Vector3 destination = Vector3.zero;
     private NavMeshAgent navMeshAgent;
@@ -30,7 +33,8 @@ public class PlayerController : MonoBehaviour
             HandleMovement();
             HandleNpcInteraction();
         }
-        if (navMeshAgent.remainingDistance < 1)
+        HandleAttacking();
+        if (navMeshAgent.velocity.magnitude < 0.01)
         {
             isMoving = false;
         }
@@ -41,10 +45,21 @@ public class PlayerController : MonoBehaviour
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out hit, 1000, _groundLayer))
+        if (Physics.Raycast(ray, out hit, 1000))
         {
             navMeshAgent.destination = hit.point;
             isMoving = true;
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (Physics.Raycast(ray, out hit, 1000))
+            {
+                if (hit.collider.tag == "Ground")
+                {
+                    Instantiate(_destinationParticles, hit.point, Quaternion.Euler(Vector3.zero));
+                }
+            }   
         }
     }
 
@@ -53,11 +68,18 @@ public class PlayerController : MonoBehaviour
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out hit, 1000, _npcLayer))
+        if (Physics.Raycast(ray, out hit, 1000, _interactionLayer))
         {
-            Debug.Log("ClickNpc");
-            hit.collider.gameObject.GetComponent<NpcController>().SetActivated(true);
-            navMeshAgent.destination = hit.point;
+            NpcController npc = hit.collider.gameObject.GetComponentInParent<NpcController>();
+            navMeshAgent.destination = npc.transform.position;;
+        }
+    }
+
+    void HandleAttacking()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            GetComponent<Animator>().SetTrigger("Attack");
         }
     }
 }

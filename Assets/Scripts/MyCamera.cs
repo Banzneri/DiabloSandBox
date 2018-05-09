@@ -15,7 +15,7 @@ public class MyCamera : MonoBehaviour {
         Vector3 pos = player.transform.position;
 
         pos.y = transform.position.y;
-        pos.z -= 17;
+        pos.z -= 13;
         transform.position = pos;
     }
 }
