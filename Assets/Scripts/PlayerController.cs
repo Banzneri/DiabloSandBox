@@ -31,7 +31,6 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             HandleMovement();
-            HandleNpcInteraction();
         }
         HandleAttacking();
         if (navMeshAgent.velocity.magnitude < 0.01)
@@ -40,38 +39,55 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void HandleMovement()
+    IEnumerator RotateMe(Vector3 targetPosition, float speed) 
     {
-        RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        if (Physics.Raycast(ray, out hit, 1000))
+        while (true)
         {
-            navMeshAgent.destination = hit.point;
-            isMoving = true;
-        }
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (Physics.Raycast(ray, out hit, 1000))
+            Vector3 dir = targetPosition - transform.position;
+            dir.y = 0; // keep the direction strictly horizontal
+            Quaternion rot = Quaternion.LookRotation(dir);
+            // slerp to the desired rotation over time
+            transform.rotation = Quaternion.Slerp(transform.rotation, rot, speed * Time.deltaTime);
+            if (Quaternion.Angle(transform.rotation, rot) < 1)
             {
-                if (hit.collider.tag == "Ground")
-                {
-                    Instantiate(_destinationParticles, hit.point, Quaternion.Euler(Vector3.zero));
-                }
-            }   
+                yield break;
+            }
         }
     }
 
-    void HandleNpcInteraction()
+    void HandleMovement()
     {
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            return;
+        }
+
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         if (Physics.Raycast(ray, out hit, 1000, _interactionLayer))
         {
-            NpcController npc = hit.collider.gameObject.GetComponentInParent<NpcController>();
-            navMeshAgent.destination = npc.transform.position;;
+            NavMeshHit navMeshHit;
+            if (NavMesh.SamplePosition(hit.point, out navMeshHit, 100, 1))
+            {
+                    NpcController npc = hit.collider.gameObject.GetComponentInParent<NpcController>();
+                    navMeshAgent.destination = navMeshHit.position;
+                    isMoving = true;
+            }
+        }
+
+        else if (Physics.Raycast(ray, out hit, 1000, _groundLayer))
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                Instantiate(_destinationParticles, hit.point, Quaternion.Euler(Vector3.zero));
+            }
+            NavMeshHit navMeshHit;
+            if (NavMesh.SamplePosition(hit.point, out navMeshHit, 100, 1))
+            {
+                   navMeshAgent.destination = navMeshHit.position;
+                   isMoving = true;
+            }
         }
     }
 
@@ -80,6 +96,19 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             GetComponent<Animator>().SetTrigger("Attack");
+            navMeshAgent.destination = transform.position;
+        }
+
+        else if (Input.GetMouseButtonDown(1))
+        {
+            GetComponent<Animator>().SetTrigger("Attack1");
+            navMeshAgent.destination = transform.position;
+        }
+
+        else if (Input.GetMouseButtonDown(0) && Input.GetKey(KeyCode.LeftShift))
+        {
+            GetComponent<Animator>().SetTrigger("Attack2");
+            navMeshAgent.destination = transform.position;
         }
     }
 }

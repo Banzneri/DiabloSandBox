@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class NpcInteractManager : MonoBehaviour {
+	[SerializeField] NpcController controller;
 	[SerializeField] GameObject[] renderObjects;
 	[SerializeField] float outLineWidth;
 

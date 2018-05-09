@@ -67,6 +67,8 @@ public class NpcController : MonoBehaviour {
         Vector3 lookAt = transform.position;
         lookAt.y = player.transform.position.y;
         player.transform.LookAt(lookAt);
+        
+        StartCoroutine(Util.Rotateme(transform, player.transform.position, 10));
         StartCoroutine(StopShowing());
     }
 
@@ -82,17 +84,42 @@ public class NpcController : MonoBehaviour {
                 NpcController npc = hit.collider.gameObject.GetComponentInParent<NpcController>();
                 bool active = npc.gameObject.Equals(this.gameObject);
                 activated = active;
-                //_selectionOutline.SetActive(active);
+                _selectionOutline.SetActive(active);
+                if (active)
+                {
+                    if (hit.collider.bounds.Contains(player.transform.position))
+                    {
+                        
+                    }
+                }
             }
             else if (Physics.Raycast(ray, out hit, 1000, _groundLayer))
             {
                 activated = false;
-                //_selectionOutline.SetActive(false);
+                _selectionOutline.SetActive(false);
             }
         }
         else if (Input.GetMouseButton(0))
         {
             
+        }
+    }
+
+    IEnumerator RotateMe(Vector3 targetPosition, float speed) 
+    {
+        while (true)
+        {
+            Debug.Log("RotateMe");
+            Vector3 dir = targetPosition - transform.position;
+            dir.y = 0; // keep the direction strictly horizontal
+            Quaternion rot = Quaternion.LookRotation(dir);
+            // slerp to the desired rotation over time
+            transform.rotation = Quaternion.Slerp(transform.rotation, rot, speed * Time.deltaTime);
+            if (Quaternion.Angle(transform.rotation, rot) < 1)
+            {
+                yield break;
+            }
+            yield return null;
         }
     }
 
