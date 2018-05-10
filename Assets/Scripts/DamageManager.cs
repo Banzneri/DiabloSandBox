@@ -16,7 +16,7 @@ public class DamageManager : MonoBehaviour {
         {
             Vector3 knockbackForce = controller.transform.forward;
             knockbackForce.y = 1;
-            other.GetComponent<Rigidbody>().AddForce(knockbackForce * 5, ForceMode.Impulse);
+            other.GetComponent<Rigidbody>().AddForce(knockbackForce * 20, ForceMode.Impulse);
             this.gameObject.SetActive(false);
         }
     }
