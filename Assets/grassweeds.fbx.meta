@@ -1,0 +1,220 @@
+fileFormatVersion: 2
+guid: 556d457f90416714fafcc91f80af8e31
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Box001
+    100002: Camera
+    100004: Grass_O_matic001
+    100006: //RootNode
+    100008: Lamp
+    100010: leaves
+    100012: leaves001
+    100014: leaves002
+    100016: Obj_000001
+    100018: Obj_000002
+    100020: Obj_000003
+    100022: Obj_000004
+    100024: Obj_000005
+    100026: OilPalm01
+    100028: stems
+    100030: stems001
+    100032: stems002
+    100034: weed007
+    100036: weed008
+    100038: weed009
+    100040: weed010
+    100042: weed03
+    100044: weed04
+    100046: weed05
+    100048: weed14
+    100050: weed15
+    400000: Box001
+    400002: Camera
+    400004: Grass_O_matic001
+    400006: //RootNode
+    400008: Lamp
+    400010: leaves
+    400012: leaves001
+    400014: leaves002
+    400016: Obj_000001
+    400018: Obj_000002
+    400020: Obj_000003
+    400022: Obj_000004
+    400024: Obj_000005
+    400026: OilPalm01
+    400028: stems
+    400030: stems001
+    400032: stems002
+    400034: weed007
+    400036: weed008
+    400038: weed009
+    400040: weed010
+    400042: weed03
+    400044: weed04
+    400046: weed05
+    400048: weed14
+    400050: weed15
+    2000000: Camera
+    2100000: 14___Default
+    2100002: mat3
+    2100004: 13___Default
+    2100006: 07___Default
+    2100008: 08___Defaults
+    2100010: 01___Default
+    2100012: BROWN0
+    2100014: GREEN2
+    2100016: GREEN3
+    2100018: 08___Default
+    2100020: 10___Default
+    2300000: Box001
+    2300002: Grass_O_matic001
+    2300004: leaves
+    2300006: leaves001
+    2300008: leaves002
+    2300010: Obj_000001
+    2300012: Obj_000002
+    2300014: Obj_000003
+    2300016: Obj_000004
+    2300018: Obj_000005
+    2300020: OilPalm01
+    2300022: stems
+    2300024: stems001
+    2300026: stems002
+    2300028: weed007
+    2300030: weed008
+    2300032: weed009
+    2300034: weed010
+    2300036: weed03
+    2300038: weed04
+    2300040: weed05
+    2300042: weed14
+    2300044: weed15
+    3300000: Box001
+    3300002: Grass_O_matic001
+    3300004: leaves
+    3300006: leaves001
+    3300008: leaves002
+    3300010: Obj_000001
+    3300012: Obj_000002
+    3300014: Obj_000003
+    3300016: Obj_000004
+    3300018: Obj_000005
+    3300020: OilPalm01
+    3300022: stems
+    3300024: stems001
+    3300026: stems002
+    3300028: weed007
+    3300030: weed008
+    3300032: weed009
+    3300034: weed010
+    3300036: weed03
+    3300038: weed04
+    3300040: weed05
+    3300042: weed14
+    3300044: weed15
+    4300000: weed15
+    4300002: Obj_000003
+    4300004: weed007
+    4300006: weed04
+    4300008: stems001
+    4300010: weed009
+    4300012: stems002
+    4300014: Obj_000004
+    4300016: Obj_000001
+    4300018: leaves001
+    4300020: leaves
+    4300022: weed03
+    4300024: weed05
+    4300026: leaves002
+    4300028: weed008
+    4300030: weed14
+    4300032: Grass_O_matic001
+    4300034: Box001
+    4300036: OilPalm01
+    4300038: weed010
+    4300040: stems
+    4300042: Obj_000002
+    4300044: Obj_000005
+    10800000: Lamp
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
