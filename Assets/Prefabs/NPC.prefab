@@ -685,7 +685,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4988538340281612}
   - component: {fileID: 135896323598126086}
-  - component: {fileID: 114454342155017868}
+  - component: {fileID: 114628190939532366}
   m_Layer: 11
   m_Name: InteractObject
   m_TagString: Untagged
@@ -1259,8 +1259,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1637769002800912}
-  m_LocalRotation: {x: -0, y: -0.7935778, z: -0, w: 0.60846883}
-  m_LocalPosition: {x: 2.79, y: -3.1527233e-16, z: 2.86}
+  m_LocalRotation: {x: -0, y: -0.8031229, z: -0, w: -0.5958134}
+  m_LocalPosition: {x: -16.12, y: -3.1527233e-16, z: 2.76}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4595394928083096}
@@ -1270,7 +1270,7 @@ Transform:
   - {fileID: 4795770134962236}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -105.04201, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -253.14099, z: 0}
 --- !u!4 &4795770134962236
 Transform:
   m_ObjectHideFlags: 1
@@ -1605,7 +1605,7 @@ MonoBehaviour:
   _activeMaterial: {fileID: 2100000, guid: 3569b9eaade78484896e15e253028027, type: 2}
   _inActiveMaterial: {fileID: 2100000, guid: 3c669d19bbed9f345b474f251c9037bb, type: 2}
   _selectionOutline: {fileID: 1772258520513298}
---- !u!114 &114454342155017868
+--- !u!114 &114628190939532366
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1613,10 +1613,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1919461708529934}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 051d287a50af3a94ea8a3798801bdc61, type: 3}
+  m_Script: {fileID: 11500000, guid: e1c90ee5a03f645438ee0acd69a970e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 114263825577333436}
   renderObjects:
   - {fileID: 1519254675885042}
   outLineWidth: 0.002

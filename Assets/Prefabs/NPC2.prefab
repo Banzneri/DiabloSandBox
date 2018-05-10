@@ -72,7 +72,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1093677308865160
 GameObject:
   m_ObjectHideFlags: 0
@@ -82,7 +82,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4521474030109908}
   - component: {fileID: 135899079161052120}
-  - component: {fileID: 114265430956385046}
+  - component: {fileID: 114302591813866690}
   m_Layer: 11
   m_Name: InteractObject
   m_TagString: Untagged
@@ -1240,7 +1240,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114265430956385046
+--- !u!114 &114302591813866690
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1248,14 +1248,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1093677308865160}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 051d287a50af3a94ea8a3798801bdc61, type: 3}
+  m_Script: {fileID: 11500000, guid: e1c90ee5a03f645438ee0acd69a970e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 114884158479327080}
   renderObjects:
   - {fileID: 1121288653051870}
   - {fileID: 1041695157520246}
-  outLineWidth: 0.05
+  outLineWidth: 0.02
 --- !u!114 &114884158479327080
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1450,9 +1449,9 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 0.5, y: 1, z: 0.5}
+  m_Extents: {x: 0.94, y: 1.72, z: 0.94}
   m_MoveThreshold: 0.1
   m_Carve: 0
   m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1.34, z: 0}
   m_TimeToStationary: 0.5

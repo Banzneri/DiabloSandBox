@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NpcInteractManager : MonoBehaviour {
-	[SerializeField] NpcController controller;
+public class OutlineManager : MonoBehaviour {
 	[SerializeField] GameObject[] renderObjects;
 	[SerializeField] float outLineWidth;
 
 	private void OnMouseEnter() {
         Debug.Log("Mouse enter npc");
-		foreach (GameObject renderObj in renderObjects)
+		foreach (GameObject renderObj in renderObjects)	
 		{
 			foreach (Renderer renderer in renderObj.GetComponents<Renderer>())
 			{
