@@ -24,13 +24,16 @@ public class MyCamera : MonoBehaviour {
     void HandleSeeThroughWalls()
     {
         RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray = Camera.main.ScreenPointToRay(Camera.main.WorldToScreenPoint(_player.transform.position));
         
-        if (Physics.Raycast(ray, out hit, LayerMask.NameToLayer("SeeThrough"))) {
+        if (Physics.Raycast(ray, out hit, 1000, _seeThroughLayer)) {
+            Debug.Log("seee");
             Renderer renderer = hit.collider.gameObject.GetComponent<Renderer>();
-            Color color = renderer.material.color;
-            color.a = 0.5f;
-            renderer.material.color = color;
+            renderer.enabled = false;
+        }
+        else
+        {
+            
         }
     }
 }
