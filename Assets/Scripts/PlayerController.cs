@@ -7,11 +7,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] LayerMask _groundLayer;
     [SerializeField] LayerMask _npcLayer;
     [SerializeField] LayerMask _interactionLayer;
+    [SerializeField] LayerMask _enemyLayer;
     [SerializeField] GameObject _destinationParticles;
+    [SerializeField] GameObject _damageZone;
     
 
     private Vector3 destination = Vector3.zero;
     private NavMeshAgent navMeshAgent;
+    [HideInInspector] public bool attacking = false;
 
     private bool isMoving = false;
 
@@ -91,25 +94,56 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void FaceMonsterWhenAttacking()
+    {
+        RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Debug.Log("FaceNotYet");
+        if (Physics.Raycast(ray, out hit, 1000, _enemyLayer))
+        {
+            Debug.Log("FaceYes");
+            transform.LookAt(hit.collider.transform.position);
+        }
+    }
+
     void HandleAttacking()
     {
+        if (attacking)
+        {
+            return;
+        }
+        bool attacked = false;
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             GetComponent<Animator>().SetTrigger("Attack");
             navMeshAgent.destination = transform.position;
+            StartCoroutine(Attack(0.7f));
         }
 
         else if (Input.GetMouseButtonDown(1))
         {
             GetComponent<Animator>().SetTrigger("Attack1");
             navMeshAgent.destination = transform.position;
+            StartCoroutine(Attack(0.7f));
         }
 
         else if (Input.GetMouseButtonDown(0) && Input.GetKey(KeyCode.LeftShift))
         {
             GetComponent<Animator>().SetTrigger("Attack2");
             navMeshAgent.destination = transform.position;
+            StartCoroutine(Attack(0.7f));
         }
+    }
+
+    IEnumerator Attack(float attackTime)
+    {
+        attacking = true;
+        FaceMonsterWhenAttacking();
+        yield return new WaitForSeconds(attackTime / 2f);
+        _damageZone.SetActive(true);
+        yield return new WaitForSeconds(attackTime);
+        _damageZone.SetActive(false);
+        attacking = false;
     }
 }
 
