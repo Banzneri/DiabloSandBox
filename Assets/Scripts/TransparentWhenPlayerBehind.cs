@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TransparentWhenPlayerBehind : MonoBehaviour {
 	[SerializeField] private LayerMask _seeThroughLayer;
+	[SerializeField] private Material _standardMaterial;
+	[SerializeField] private Material _transparentMaterial;
 	private GameObject _player;
 
 	private bool _visible = true;

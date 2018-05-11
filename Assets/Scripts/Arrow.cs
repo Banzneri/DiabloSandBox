@@ -35,6 +35,9 @@ public class Arrow : MonoBehaviour {
 			other.gameObject.GetComponent<Enemy>().DoStun(0.5f);
 			other.gameObject.GetComponent<Enemy>().Health -= 1;
 		}
-		Destroy(this.gameObject);
+		if (other.tag != "Player")
+		{
+			Destroy(this.gameObject);	
+		}
 	}
 }

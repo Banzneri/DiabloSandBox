@@ -18,22 +18,5 @@ public class MyCamera : MonoBehaviour {
         pos.y = transform.position.y;
         pos.z -= 13;
         transform.position = pos;
-        HandleSeeThroughWalls();
-    }
-
-    void HandleSeeThroughWalls()
-    {
-        RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Camera.main.WorldToScreenPoint(_player.transform.position));
-        
-        if (Physics.Raycast(ray, out hit, 1000, _seeThroughLayer)) {
-            Debug.Log("seee");
-            Renderer renderer = hit.collider.gameObject.GetComponent<Renderer>();
-            renderer.enabled = false;
-        }
-        else
-        {
-            
-        }
     }
 }

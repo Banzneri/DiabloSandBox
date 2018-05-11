@@ -233,7 +233,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4887711802207940, guid: ffb9282cc01d63d4dbfbcf092edaa1bd, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.529
       objectReference: {fileID: 0}
     - target: {fileID: 4887711802207940, guid: ffb9282cc01d63d4dbfbcf092edaa1bd, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1238,7 +1238,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh12934
+  m_Name: pb_Mesh242562
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -3035,7 +3035,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _seeThroughLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4096
+  _standardMaterial: {fileID: 2100000, guid: 34b8cac6392e1cf488c81011ea0564d5, type: 2}
+  _transparentMaterial: {fileID: 2100000, guid: d7155917d5c291d4599935f677308914,
+    type: 2}
 --- !u!1 &508730169
 GameObject:
   m_ObjectHideFlags: 0
@@ -3380,7 +3383,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh12982
+  m_Name: pb_Mesh242606
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -4270,7 +4273,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh13252
+  m_Name: pb_Mesh242778
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -4853,7 +4856,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1203595281}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.1
+  m_Radius: 0.45
   m_Speed: 6
   m_Acceleration: 60
   avoidancePriority: 50
@@ -4862,7 +4865,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 2
+  m_Height: 2.1
   m_BaseOffset: -0.11
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 0
@@ -4913,7 +4916,7 @@ CapsuleCollider:
   m_Radius: 0.5
   m_Height: 2.28
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!54 &1203595288
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5715,7 +5718,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _seeThroughLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4096
+  _standardMaterial: {fileID: 0}
+  _transparentMaterial: {fileID: 0}
 --- !u!1 &1440704953
 GameObject:
   m_ObjectHideFlags: 0
@@ -5912,7 +5917,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh13136
+  m_Name: pb_Mesh242722
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -6620,7 +6625,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _seeThroughLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4096
+  _standardMaterial: {fileID: 0}
+  _transparentMaterial: {fileID: 0}
 --- !u!4 &1726214575 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 074a0f1d19633644c9a2aa0b4df67c4f, type: 3}
