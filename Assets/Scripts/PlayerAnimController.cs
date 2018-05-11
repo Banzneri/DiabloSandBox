@@ -14,5 +14,6 @@ public class PlayerAnimController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		_anim.SetBool("Running", _player.IsMoving);
+		_anim.SetBool("Attacking", _player.attacking);
 	}
 }

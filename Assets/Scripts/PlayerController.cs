@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] LayerMask _enemyLayer;
     [SerializeField] GameObject _destinationParticles;
     [SerializeField] GameObject _damageZone;
+    [SerializeField] GameObject _arrowPrefab;
     
 
     private Vector3 destination = Vector3.zero;
@@ -112,7 +113,7 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-        bool attacked = false;
+
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             GetComponent<Animator>().SetTrigger("Attack");
@@ -120,23 +121,32 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(Attack(0.7f));
         }
 
-        else if (Input.GetMouseButtonDown(1))
+        else if (Input.GetMouseButton(1))
         {
             GetComponent<Animator>().SetTrigger("Attack1");
             navMeshAgent.destination = transform.position;
             StartCoroutine(Attack(0.7f));
         }
 
-        else if (Input.GetMouseButtonDown(0) && Input.GetKey(KeyCode.LeftShift))
+        else if (Input.GetMouseButton(0) && Input.GetKey(KeyCode.LeftShift))
         {
             GetComponent<Animator>().SetTrigger("Attack2");
             navMeshAgent.destination = transform.position;
             StartCoroutine(Attack(0.7f));
         }
+
+        else if (Input.GetKeyDown(KeyCode.E))
+        {
+            Vector3 arrowSpawnPos = transform.position;
+            arrowSpawnPos.y += transform.lossyScale.y * 1.5f;
+            Util.RotateToMouseDirection(transform);
+            Instantiate(_arrowPrefab, arrowSpawnPos, transform.rotation);
+        }
     }
 
     IEnumerator Attack(float attackTime)
     {
+        Util.RotateToMouseDirection(transform);
         attacking = true;
         FaceMonsterWhenAttacking();
         yield return new WaitForSeconds(attackTime / 2f);

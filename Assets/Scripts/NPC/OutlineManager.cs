@@ -5,8 +5,14 @@ using UnityEngine;
 public class OutlineManager : MonoBehaviour {
 	[SerializeField] GameObject[] renderObjects;
 	[SerializeField] float outLineWidth;
+	
+	public bool active = true;
 
 	private void OnMouseEnter() {
+		if (!active)
+		{
+			return;	
+		}
         Debug.Log("Mouse enter npc");
 		foreach (GameObject renderObj in renderObjects)	
 		{
@@ -32,5 +38,6 @@ public class OutlineManager : MonoBehaviour {
 				}
 			}	
 		}
+		Debug.Log("Mouse exit npc");
 	}
 }

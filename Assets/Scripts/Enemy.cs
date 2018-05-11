@@ -4,19 +4,26 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour {
-    private float _aggroDistance = 14;
-    private float _attackDistance = 3;
-    private int _health = 3;
+    [SerializeField] private Renderer[] _renderers;
+    [SerializeField] private float _aggroDistance = 14;
+    [SerializeField] private float _attackDistance = 3;
+    [SerializeField] private int _health = 3;
 
     private PlayerController _player;
     private bool _attacking = false;
-    private float _attackTime = 1;
+    private float _attackTime = 0.7f;
     private bool dead = false;
+    private bool _stunned = false;
 
     public int Health
     {
         get { return _health; }
         set { this._health = value; }
+    }
+
+    public bool CanMove
+    {
+        get { return _health > 0 && !_stunned; }
     }
 
 
@@ -29,7 +36,7 @@ public class Enemy : MonoBehaviour {
 	void Update () {
         HandleDying();
 
-        if (_health <= 0)
+        if (!CanMove)
         {
             return;
         }
@@ -53,6 +60,7 @@ public class Enemy : MonoBehaviour {
     IEnumerator Attack()
     {
         GetComponent<Animator>().SetTrigger("Attack");
+        //GetComponent<Animator>().CrossFadeInFixedTime("Attack", 1.5f, 0);
         GetComponent<NavMeshAgent>().destination = transform.position;
         GetComponent<NavMeshAgent>().isStopped = true;
         transform.LookAt(_player.transform.position);
@@ -94,9 +102,30 @@ public class Enemy : MonoBehaviour {
 
     IEnumerator Die()
     {
+        StartCoroutine(Util.FlickerMe(_renderers, 0.1f));
         GetComponent<Animator>().SetTrigger("Die");
         GetComponent<Animator>().SetBool("Dead", true);
+        GetComponent<Collider>().enabled = false;
+        GetComponent<NavMeshAgent>().enabled = false;
+        GetComponent<OutlineManager>().enabled = false;
         yield return new WaitForSeconds(3);
         Destroy(this.gameObject);
+    }
+
+    private IEnumerator Stun(float stunTime)
+    {
+        Debug.Log("Stun");
+        _stunned = true;
+        GetComponent<Animator>().SetBool("Stunned", true);
+        GetComponent<Animator>().SetTrigger("Stun");
+        GetComponent<Animator>().CrossFadeInFixedTime("Knockback", 0, 0);
+        yield return new WaitForSeconds(stunTime);
+        GetComponent<Animator>().SetBool("Stunned", false);
+        _stunned = false;
+    }
+
+    public void DoStun(float stunTime)
+    {
+        StartCoroutine(Stun(stunTime));
     }
 }
