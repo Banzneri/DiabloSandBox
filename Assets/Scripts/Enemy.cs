@@ -1,9 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy : MonoBehaviour {
+public class Enemy : MonoBehaviour, IComparable<Enemy> {
     [SerializeField] private Renderer[] _renderers;
     [SerializeField] private float _aggroDistance = 14;
     [SerializeField] private float _attackDistance = 3;
@@ -24,6 +25,11 @@ public class Enemy : MonoBehaviour {
     public bool CanMove
     {
         get { return _health > 0 && !_stunned; }
+    }
+
+    public float GetDistanceToPlayer
+    {
+        get { return Vector3.Distance(transform.position, _player.transform.position); }
     }
 
 
@@ -127,5 +133,15 @@ public class Enemy : MonoBehaviour {
     public void DoStun(float stunTime)
     {
         StartCoroutine(Stun(stunTime));
+    }
+
+    public int CompareTo(Enemy other)
+    {
+        // If other is not a valid object reference, this instance is greater.
+        if (other == null) return 1;
+
+        // The temperature comparison depends on the comparison of 
+        // the underlying Double values. 
+        return GetDistanceToPlayer.CompareTo(other.GetDistanceToPlayer);
     }
 }
