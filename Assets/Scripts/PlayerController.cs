@@ -116,23 +116,17 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            GetComponent<Animator>().SetTrigger("Attack");
-            navMeshAgent.destination = transform.position;
-            StartCoroutine(Attack(0.7f));
+            StartCoroutine(Attack(1f, "Attack1"));
         }
 
         else if (Input.GetMouseButton(1))
         {
-            GetComponent<Animator>().SetTrigger("Attack1");
-            navMeshAgent.destination = transform.position;
-            StartCoroutine(Attack(0.7f));
+            StartCoroutine(Attack(1f, "Attack2"));
         }
 
         else if (Input.GetMouseButton(0) && Input.GetKey(KeyCode.LeftShift))
         {
-            GetComponent<Animator>().SetTrigger("Attack2");
-            navMeshAgent.destination = transform.position;
-            StartCoroutine(Attack(0.7f));
+            StartCoroutine(Attack(1f, "Attack3"));
         }
 
         else if (Input.GetKeyDown(KeyCode.E))
@@ -144,12 +138,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    IEnumerator Attack(float attackTime)
+    IEnumerator Attack(float attackTime, string attackName)
     {
-        Util.RotateToMouseDirection(transform);
         attacking = true;
+        navMeshAgent.destination = transform.position;
+        GetComponent<Animator>().CrossFadeInFixedTime(attackName, 0.1f, 1);
+        GetComponent<Animator>().SetBool("Attacking", true);
+        Util.RotateToMouseDirection(transform);
         FaceMonsterWhenAttacking();
-        yield return new WaitForSeconds(attackTime / 2f);
+        yield return new WaitForSeconds(attackTime / 2.2f);
         _damageZone.SetActive(true);
         yield return new WaitForSeconds(attackTime);
         _damageZone.SetActive(false);

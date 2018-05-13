@@ -137,11 +137,8 @@ public class Enemy : MonoBehaviour, IComparable<Enemy> {
 
     public int CompareTo(Enemy other)
     {
-        // If other is not a valid object reference, this instance is greater.
         if (other == null) return 1;
 
-        // The temperature comparison depends on the comparison of 
-        // the underlying Double values. 
         return GetDistanceToPlayer.CompareTo(other.GetDistanceToPlayer);
     }
 }
