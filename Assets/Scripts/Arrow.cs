@@ -10,7 +10,6 @@ public class Arrow : MonoBehaviour {
 	void Start () {
 		dir = GameObject.FindGameObjectWithTag("Player").transform.position + transform.forward * 20;
 		dir.y = GameObject.FindGameObjectWithTag("Player").transform.lossyScale.y * 1.5f;
-		Debug.Log(dir);
 	}
 	
 	// Update is called once per frame

@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour
 {
@@ -8,13 +10,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] LayerMask _npcLayer;
     [SerializeField] LayerMask _interactionLayer;
     [SerializeField] LayerMask _enemyLayer;
+    [SerializeField] LayerMask _menuLayer;
     [SerializeField] GameObject _destinationParticles;
     [SerializeField] GameObject _damageZone;
     [SerializeField] GameObject _arrowPrefab;
     
 
     private Enemy _currentTarget = null;
-    private string _attackInQueue = "";
+    private Attack _attackInQueue = null;
     private Vector3 destination = Vector3.zero;
     private NavMeshAgent navMeshAgent;
     private Vector3 _destination;
@@ -79,6 +82,20 @@ public class PlayerController : MonoBehaviour
         bool mouseDown = Input.GetMouseButtonDown(0);
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        
+        PointerEventData pointerData = new PointerEventData(EventSystem.current);
+        pointerData.position = Input.mousePosition;
+ 
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointerData, results);
+ 
+        if (results.Count > 0) {
+            //WorldUI is my layer name
+            if (results[0].gameObject.layer == LayerMask.NameToLayer("Menu"))
+            { 
+                return;
+            }
+        }
 
         if (Physics.Raycast(ray, out hit, 1000, _enemyLayer))
         {
@@ -88,9 +105,12 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("EnemyCLicked");
                 Enemy enemy = hit.collider.gameObject.GetComponent<Enemy>();
                 _currentTarget = enemy;
-                _attackInQueue = "Attack";
-                navMeshAgent.destination = navMeshHit.position;
-                isMoving = true;
+                _attackInQueue = Attacks.MeleeAttackDefault();
+                if (enemy.GetDistanceToPlayer > 2)
+                {
+                    navMeshAgent.destination = navMeshHit.position;
+                    isMoving = true;   
+                }
             }
         }
 
@@ -130,7 +150,7 @@ public class PlayerController : MonoBehaviour
 
     void ResetTargetAndAttack()
     {
-        _attackInQueue = "";
+        _attackInQueue = null;
         _currentTarget = null;
     }
 
@@ -155,9 +175,10 @@ public class PlayerController : MonoBehaviour
 
         if (_currentTarget != null)
         {
-            if (Vector3.Distance(transform.position, _currentTarget.transform.position) < 2)
+            if (_currentTarget.GetDistanceToPlayer < 2)
             {
-                StartCoroutine(DoAttack(Attacks.MeleeAttackDefault()));
+                StartCoroutine(DoAttack(_attackInQueue));
+                ResetTargetAndAttack();
             }
         }
 
