@@ -25,6 +25,7 @@ public class InventoryManager : MonoBehaviour {
 			for (int x = 0; x < _invSlots.GetLength(1); x++)
 			{
 				_invSlots[y, x] = new InventorySlot(new Vector2(x, y), UISlots[y * 10 + x]);
+				_invSlots[y, x].Image.color = _unOccupiedSpaceColor;
 			}
 		}
 	}
@@ -52,24 +53,26 @@ public class InventoryManager : MonoBehaviour {
 
 				if (slots.Count == item.InvSize.x * item.InvSize.y)
 				{
-					Debug.Log("Slots yeah");
 					foreach (var slot in slots)
 					{
 						Debug.Log(slot.Coord);
 						slot.SetOccupyingItem(item);
+						slot.Image.color = _occupiedSpaceColor;
 					}
 					_items.Add(Items.GetNewItemInInventory(item, slots[0], _itemInInventoryPrefab, _invPanel));
-					Debug.Log("Jiihaa");
-					foreach (ItemInInventory inv in _items)
-					{
-						Debug.Log(inv.Slot.Coord);
-					}
 					return true;
 				}
 			}
 		}
 
 		return false;
+	}
+
+	public void DeleteItem(ItemInInventory item)
+	{
+		item.Slot.Image.color = _unOccupiedSpaceColor;
+		item.Slot.SetOccupyingItem(null);
+		_items.Remove(item);
 	}
 
 	private bool IsSlotOccupied(Vector2 coord)

@@ -21,6 +21,8 @@ public class ItemInInventory : MonoBehaviour, IDragHandler
 
     public void Init(Item item, InventorySlot startSlot)
     {
+        Sprite itemIcon = Resources.Load<Sprite>("Icons/" + item.Name + "Icon");
+        GetComponent<Image>().sprite = itemIcon;
         _item = item;
         _startSlot = startSlot;
         Vector3 scale = transform.localScale;
@@ -29,10 +31,9 @@ public class ItemInInventory : MonoBehaviour, IDragHandler
         transform.localScale = scale;
         Vector3 position = _startSlot.Image.transform.position;
         
-        position.y -= _startSlot.Image.GetComponent<RectTransform>().rect.height / 2;
-        position.x += _startSlot.Image.GetComponent<RectTransform>().rect.width / 2;
+        position.y -= _item.InvSize.y > 1 ? _startSlot.Image.GetComponent<RectTransform>().rect.height : 0;
+        position.x += _item.InvSize.x > 1 ? _startSlot.Image.GetComponent<RectTransform>().rect.width / 2 : 0;
         transform.position = position;
-        //GetComponent<Image>().sprite = _item.ItemImage.sprite;
     }
 
     public Item Item
@@ -46,4 +47,10 @@ public class ItemInInventory : MonoBehaviour, IDragHandler
         _player.Destination = _player.transform.position;
         transform.position = eventData.position;
     }
+
+    public override string ToString()
+    {
+        string toString = _item.Name;
+        return toString;
+    }  
 }

@@ -16707,8 +16707,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45b245eba98cb104d9d8fbdf61f79e31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _occupiedSpaceColor: {r: 0, g: 0, b: 0, a: 1}
-  _unOccupiedSpaceColor: {r: 0.40784317, g: 0.4039216, b: 0.48627454, a: 1}
+  _occupiedSpaceColor: {r: 0.41960788, g: 0.4156863, b: 0.5372549, a: 1}
+  _unOccupiedSpaceColor: {r: 0.83921576, g: 0.83921576, b: 0.83921576, a: 1}
   UISlots:
   - {fileID: 933309484}
   - {fileID: 1090771611}

@@ -27,7 +27,7 @@ public class ItemOnGround : MonoBehaviour {
 			{
 				if (_inventoryManager.AddItemDefault(_item))
 				{
-					//Destroy(this.gameObject);
+					Destroy(this.gameObject);
 				}
 			}
 		}
